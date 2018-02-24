@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Belly Button Data</title>
+</head>
+<body>
+    <div class="container">
+            <div class="jumbotron" style="background-image: url(/static/images/microbes-sem.jpg); background-size: cover; background: contain;">
+                        
+                <div class="row">
+                            <h1 style="display: block; text-shadow:
+                            -1px -1px 0 #000,
+                            1px -1px 0 #000,
+                            -1px 1px 0 #000,
+                            1px 1px 0 #000; color: white; text-align:center;">Belly Button Biodiversity </h1>
+                </div>
+                <div class="row">
+                            <h1 style="text-shadow:
+                            -1px -1px 0 #000,
+                            1px -1px 0 #000,
+                            -1px 1px 0 #000,
+                            1px 1px 0 #000; color:  white; text-align:center;">Dashboard</h1>
+                </div>
+                <div class="row">
+                            <h3 style="text-shadow:
+                            -1px -1px 0 #000,
+                            1px -1px 0 #000,
+                            -1px 1px 0 #000,
+                            1px 1px 0 #000; color:  white; text-align:center;">Use the interactive charts below to explore the dataset</h3>
+                </div>
+                        
+            </div>
+            
+    </div>
+    <div class="container">
+        <div class="col-md-3">
+            <h4>SELECT Sample</h4>
+            <div id="plotly-target">
+                <select id="selDataset" onchange="optionChanged(this.value)">
+                    <!-- sample input here -->
+                        {% for i in sample_names_list %}
+                            <option value = {{ i }}>{{ i }}</option>
+                        {% endfor %}
+                    
+    
+                </select>
+                
+            </div>
+        </div>
+    </div>
+    <div id="plot"></div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
