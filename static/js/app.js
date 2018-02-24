@@ -3,42 +3,39 @@
 // var samplenameselect = document.getElementById("nameSampleSelect");
 
 function selectedOption(value){
-    console.log(value);  
+    console.log(value)  
+    return buildPlot(value);
 };
 
-selectedOption();
+function buildPlot(chosenSample) {
 
-// function buildPlot(chosenSample) {
-//     Plotly.d3.json(`/metadata/${chosenSample}`, function(error, response) {
-//         console.log(response);
-            
+    Plotly.d3.json(`/samples/${chosenSample}`, function(error, response) {
+        
+        console.log(response);
+        
+        var data = [{
+            values: response.sample_values,
+            labels: response.otu_ids,
+            type: "pie"
+        }];
 
-//         var data = [{
-//             values: response.map(data => data.sample_values),
-//             labels: response.map(data => data.otu_ids),
-//             type: "pie"
-//         }];
+        var layout = {
+            title: "Top 10 samples by otu_id",
+            height: 600,
+            width: 800
+        };
 
-//         var layout = {
-//             title: "Top 10 samples by otu_id",
-//             height: 600,
-//             width: 800
-//         };
-
-//     Plotly.newPlot("pie", data, layout)});
+    Plotly.newPlot("pie", data, layout)
+    });
     
-//     function updatePlotly(newdata) {
-//         var PIE = document.getElementById("pie");
-//         Plotly.restyle(PIE, "values", [newdata]);
-//     }
+    // function updatePlotly(newdata) {
+    //     var PIE = document.getElementById("pie");
+    //     Plotly.restyle(PIE, "values", [newdata]);
+    // };
 
-//     function optionChanged(namesample) {
-//         var nameSampleSelect = document.getElementById("selDataset");
-//     }
     
-// updatePlotly(namesample);
 
-// buildPlot();
+
 
 
 
