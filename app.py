@@ -23,8 +23,13 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    # build this element in Flask
+    DF = pd.read_csv("Instructions\DataSets\Belly_Button_Biodiversity_samples.csv")
+    DF_index = DF.set_index('otu_id')
+    results = list(DF_index)
     
-    return render_template("index.html")
+    DF_list = list(np.ravel(results))
+    return render_template("index.html", DF_list = DF_list)
 
 
 @app.route('/names')
@@ -79,7 +84,7 @@ def sample(sample = 'BB_943'):
     DF_sample_filter = DF.filter(items = [sample,'otu_id'])
     DF_sample_sort = DF_sample_filter.sort_values(by=sample, ascending=False)
     DF_sample_nonzero_nan = DF_sample_sort[DF_sample_sort > 0]
-    DF_sample_nonzero = DF_sample_nonzero_nan.dropna()
+    DF_sample_nonzero = DF_sample_nonzero_nan.dropna().head(10)
     sample_values = DF_sample_nonzero[sample].tolist()
     otu_ids = DF_sample_nonzero['otu_id'].tolist()
     results = [{'otu_ids':otu_ids,'sample_values':sample_values}]
