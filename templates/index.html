@@ -39,7 +39,7 @@
         <div class="col-md-3">
             <h4>SELECT Sample</h4>
             <div id="nameSampleSelect">
-                <select id="selDataset" onchange="selectedOption(this.value)">
+                <select id="selDataset" onchange="optionChanged(this.value)">
                     <!-- sample input here -->
                         {% for i in DF_list %}
                             <option value = {{ i }}>{{ i }}</option>

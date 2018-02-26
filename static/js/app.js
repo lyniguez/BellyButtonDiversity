@@ -2,7 +2,7 @@
 // var url = "/samples/"+samplenameselect;
 // var samplenameselect = document.getElementById("nameSampleSelect");
 
-function selectedOption(value){
+function optionChanged(value){
     console.log(value)  
     return buildPlot(value);
 };
