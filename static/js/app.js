@@ -2,31 +2,39 @@
 // var url = "/samples/"+samplenameselect;
 // var samplenameselect = document.getElementById("nameSampleSelect");
 
+
 function optionChanged(value){
-    console.log(value)  
-    return buildPlot(value);
+    console.log(value)
+    return buildPie(value);
+    return buildBubblePlot(value);
 };
 
-function buildPlot(chosenSample) {
+function buildPie(chosenSample) {
 
     Plotly.d3.json(`/samples/${chosenSample}`, function(error, response) {
         
         console.log(response);
-        
+
         var data = [{
-            values: response.sample_values,
-            labels: response.otu_ids,
-            type: "pie"
+            labels: response[0]['otu_ids'],
+            values: response[0]['sample_values'],
+            type: 'pie'
         }];
+       
+
+        console.log(data);  
 
         var layout = {
-            title: "Top 10 samples by otu_id",
-            height: 600,
-            width: 800
+            title: "Top 10 samples by otu_id",    
         };
 
-    Plotly.newPlot("pie", data, layout)
+        console.log(layout);
+    Plotly.newPlot("pie", data, layout);
     });
+};
+
+defaultSample = 'BB_940'
+buildPie(defaultSample);
     
     // function updatePlotly(newdata) {
     //     var PIE = document.getElementById("pie");

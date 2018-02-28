@@ -36,7 +36,7 @@
     </div>
     
     <div class="container">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <h4>SELECT Sample</h4>
             <div id="nameSampleSelect">
                 <select id="selDataset" onchange="optionChanged(this.value)">
@@ -50,8 +50,13 @@
         </div>
     </div>
 
+    <div class="col-md-5">
     <div id="pie"></div>
-
+    </div>  
+    
+    <div class="col-md-5">
+    <div id="bubble"></div>
+    </div>
     
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>

@@ -77,9 +77,9 @@ def wfreq(samplewf):
     
     return jsonify(results)
 
-@app.route('/samples', defaults={'sample':'BB_943'})
+@app.route('/samples', defaults={'sample':'BB_940'})
 @app.route('/samples/<sample>')
-def sample(sample = 'BB_943'):
+def sample(sample):
     DF = pd.read_csv("Instructions\DataSets\Belly_Button_Biodiversity_Samples.csv")
     DF_sample_filter = DF.filter(items = [sample,'otu_id'])
     DF_sample_sort = DF_sample_filter.sort_values(by=sample, ascending=False)
@@ -87,9 +87,11 @@ def sample(sample = 'BB_943'):
     DF_sample_nonzero = DF_sample_nonzero_nan.dropna().head(10)
     sample_values = DF_sample_nonzero[sample].tolist()
     otu_ids = DF_sample_nonzero['otu_id'].tolist()
-    results = [{'otu_ids':otu_ids,'sample_values':sample_values}]
+    DF_sample_index = [{'otu_ids':otu_ids,'sample_values':sample_values}]
+    results = DF_sample_index
+    DF_list = list(np.ravel(results))
 
-    return jsonify(results)
+    return jsonify(DF_list)
 
 
 # this last bit of code allows you to run the python script through the terminal
